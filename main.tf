@@ -146,3 +146,4 @@ resource "aws_instance" "app_server" {
     aws_ecr_repository.repositories
   ]
 }
+
