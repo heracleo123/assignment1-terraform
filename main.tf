@@ -122,6 +122,7 @@ resource "aws_ecr_repository" "repositories" {
 resource "aws_instance" "app_server" {
   ami                    = data.aws_ami.amazon_linux_2.id
   instance_type          = var.instance_type
+  key_name               = var.key_pair_name
   vpc_security_group_ids = [aws_security_group.ec2_sg.id]
   subnet_id              = data.aws_subnets.default_public.ids[0]
   associate_public_ip_address = true

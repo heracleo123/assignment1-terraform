@@ -12,7 +12,13 @@ resource "aws_security_group" "alb_sg" {
     cidr_blocks = ["0.0.0.0/0"]
     description = "Allow HTTP from anywhere"
   }
-
+  ingress {
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+    description = "Allow HTTPS from anywhere"
+  }
   egress {
     from_port   = 0
     to_port     = 0
@@ -52,7 +58,7 @@ resource "aws_lb_target_group" "app_tg" {
   protocol    = "HTTP"
   target_type = "instance"
   vpc_id      = data.aws_vpc.default.id
-
+  
   health_check {
     enabled             = true
     healthy_threshold   = 2
@@ -74,8 +80,13 @@ resource "aws_lb_listener" "http_listener" {
   protocol          = "HTTP"
 
   default_action {
-    type             = "forward"
-    target_group_arn = aws_lb_target_group.app_tg["8081"].arn
+    type = "fixed-response"
+    
+    fixed_response {
+      content_type = "text/plain"
+      message_body = "Page not found"
+      status_code  = "404"
+    }
   }
 }
 

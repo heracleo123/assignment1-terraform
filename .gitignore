@@ -13,7 +13,7 @@ crash.*.log
 *.tfvars
 *.tfvars.json
 
-# Ignore override files, as they are usually used to override resources locally
+# Ignore override files as they are usually used to override resources locally
 override.tf
 override.tf.json
 *_override.tf
@@ -23,22 +23,29 @@ override.tf.json
 # !example_override.tf
 
 # Include tfplan files to ignore the plan output of command: terraform plan -out=tfplan
-*tfplan*
+# example: *tfplan*
 
 # Ignore CLI configuration files
 .terraformrc
 terraform.rc
 
-# Ignore plan files
-*.tfplan
+# Terraform provider downloads
+.terraform/providers/
 
-# Ignore lock files
+# Terraform lock file
 .terraform.lock.hcl
 
-# IDE and editor files
+# Terraform variable files with sensitive data
+terraform.tfvars
+*.tfvars
+
+# Zip files (like the terraform binary you downloaded)
+*.zip
+
+# IDE files
 .vscode/
 .idea/
-*.swp
-*.swo
-*~
+
+# OS files
 .DS_Store
+Thumbs.db

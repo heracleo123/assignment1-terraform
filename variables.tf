@@ -15,6 +15,13 @@ variable "project_name" {
   type        = string
   default     = "Assignment1"
 }
+
+variable "key_pair_name" {
+  description = "Name of the EC2 key pair to use for SSH (must exist in AWS)"
+  type        = string
+  default     = "vockey"
+}
+
 variable "instance_type" {
   description = "EC2 instance type"
   type        = string
